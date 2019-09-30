@@ -7,7 +7,7 @@ LDIR = lib
 CC = g++
 CFLAGS = -Wall -I$(IDIR) -L$(LDIR) -fPIC
 
-_DEPS = operation/sum.hpp hello/hello.hpp
+_DEPS = *.hpp
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ = main.o hello.o
