@@ -3,7 +3,7 @@
 ./configure
 ```
 
-## Build make version (optional)
+## Build make with version (optional)
 ```bash
 cp Makefile Makefile.bak
 cp Makefile-with-version Makefile
@@ -38,7 +38,7 @@ make clean FORCE=true
 make default-make
 ```
 
-## Back to default make (optional)
+## Back to default make (without version-optional)
 ```bash
 mv Makefile.bak Makefile
 ```
