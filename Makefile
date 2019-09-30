@@ -7,13 +7,10 @@ LDIR = lib
 CC = g++
 CFLAGS = -Wall -I$(IDIR) -L$(LDIR) -fPIC
 
-#LIBS = -lstdc++
-LIBS = -lhello
-
-_DEPS = hello.hpp
+_DEPS = *.hpp
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o
+_OBJ = main.o hello.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
@@ -23,20 +20,23 @@ start:
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib bin/main
 	bin/main_static
 
-build: libhello bin/main bin/main_static
+build: liboperation bin/main bin/main_static buildClean
+buildClean:
+	rm -f $(ODIR)/*.o $(ODIR)/**/*.o $(LDIR)/*.a
 
+#LIBS = -lstdc++
+LIBS = -loperation
 bin/main: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
+LIBS = -loperation
 bin/main_static: $(OBJ)
 	$(CC) -static -o $@ $^ $(CFLAGS) $(LIBS)
-	rm -f $(ODIR)/main.o
 
-libhello: $(ODIR)/hello.o
+liboperation: $(ODIR)/operation/sum.o
 	$(CC) $(CFLAGS) -shared -o lib/$@.so $^
-	ar -rcs lib/$@.a $^
-	rm -f $(ODIR)/hello.o
+	ar -rcs $(LDIR)/$@.a $^
 
 .PHONY: clean
-clean:
-	rm -f bin/* $(ODIR)/*.o $(LDIR)/*.a $(LDIR)/*.so
+clean: buildClean
+	rm -f bin/* $(LDIR)/*.so
