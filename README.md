@@ -7,7 +7,8 @@ make build
 ## Usage
 
 ```bash
-make start
+make build
+make
 ```
 ## Clean
 
