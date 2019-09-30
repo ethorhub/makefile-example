@@ -4,4 +4,7 @@
 bin/*
 
 
+#Original Makefile build output
+Makefile.orig
+#keep .gitkeep for empty folder 
 !.gitkeep

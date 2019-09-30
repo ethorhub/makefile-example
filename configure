@@ -1,0 +1,6 @@
+#!/bin/bash
+mkdir bin
+mkdir lib
+mkdir obj
+mkdir obj/hello
+mkdir obj/operation
