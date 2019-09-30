@@ -16,7 +16,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-start:
+all:
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib bin/main
 	bin/main_static
 
