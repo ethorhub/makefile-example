@@ -3,8 +3,10 @@
 ./configure
 ```
 
-## Build make version
+## Build make version (optional)
 ```bash
+cp Makefile Makefile.bak
+mv Makefile-with-version Makefile
 make build-v1
 ```
 
@@ -34,4 +36,11 @@ make clean FORCE=true
 ## Default make
 ```bash
 make default-make
+```
+
+## Back to default make (optional)
+```bash
+mv Makefile Makefile-with-version
+mv Makefile.bak Makefile
+make build-v1
 ```
