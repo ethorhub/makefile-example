@@ -1,8 +1,8 @@
 #include "hello.hpp"
 #include <iostream>
 using namespace std;
-void helloworld()
+void helloworldFromObject()
 {
-    cout << "Hello World!" << endl;
-    cout << "I'm a C++ program" << endl;
+    cout << "Hello World! From Object" << endl;
+    cout << "I'm a C++ program (object)" << endl;
 }
