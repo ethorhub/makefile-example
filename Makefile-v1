@@ -54,6 +54,6 @@ endif
 
 
 #all Makefile-v... files to default
-backup-make:
+default-make:
 	@cp Makefile Makefile-v1
 	@mv Makefile.orig Makefile
