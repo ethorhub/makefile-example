@@ -15,7 +15,7 @@ _DEPS = *.hpp
 DEPS = $(patsubst %,$(INCLUDEDIR)/%,$(_DEPS))
 
 #Object files
-_OBJ := main.o
+_OBJ := main.o #main file
 _OBJ += hello.o sum.o
 OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
 
@@ -24,38 +24,27 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
 	@$(CC) -c -o $@ $< $(CFLAGS)
 
 #Run program with dynamic libraries
-run_dynamic:
+run:
 	@LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib $(BINDIR)/main
 
-#Run program with static libraries
-run_static:
-	@$(BINDIR)/main_static
-
 #Build and clean
-build: liboperation libhello $(BINDIR)/main $(BINDIR)/main_static buildClean
+build: liboperation libhello $(BINDIR)/main buildClean
 buildClean:
 	@$(RM) $(OBJDIR)/*.o $(OBJDIR)/**/*.o $(LIBDIR)/*.a
 
 #Main program build with dynamic libs
 #LIBS = -lstdc++
-LIBS = -loperation -lhello
+LIBS = -lhello -loperation
 $(BINDIR)/main: $(OBJ)
 	@$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
-#Main program build with static libs
-LIBS = -loperation -lhello
-$(BINDIR)/main_static: $(OBJ)
-	@$(CC) -static -o $@ $^ $(CFLAGS) $(LIBS)
-
 #Operation lib compile
-liboperation: $(OBJDIR)/operation/sum.o
-	@$(CC) $(CFLAGS) -shared -o lib/$@.so $^
+liboperation: $(OBJDIR)/operation/sum.o #Static library
 	@ar -rcs $(LIBDIR)/$@.a $^
 
 #Hello lib compile
-libhello: $(OBJDIR)/hello/hello.o
+libhello: $(OBJDIR)/hello/hello.o #Dynamic library
 	@$(CC) $(CFLAGS) -shared -o lib/$@.so $^
-	@ar -rcs $(LIBDIR)/$@.a $^
 
 #Clean build files
 .PHONY: clean
