@@ -1,9 +1,9 @@
 #Directory names
-BINDIR = bin
-INCLUDEDIR = include
-LIBDIR = lib
-OBJDIR = obj
-SRCDIR = src
+BINDIR = bin #for binary
+INCLUDEDIR = src #for header files
+LIBDIR = lib #for library
+OBJDIR = obj #for objects
+SRCDIR = src #for source code
 
 #C compiler info
 #CC = gcc
