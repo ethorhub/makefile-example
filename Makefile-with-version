@@ -2,3 +2,7 @@ build-v1:
 	@cp Makefile Makefile.orig
 	@echo "Makefile version 1"
 	@cp Makefile-v1 Makefile
+build-v2:
+	@cp Makefile Makefile.orig
+	@echo "Makefile version 2"
+	@cp Makefile-v2 Makefile
