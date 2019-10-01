@@ -1,14 +1,14 @@
 #Directory names
-BINDIR = bin
-INCLUDEDIR = include
-LIBDIR = lib
-OBJDIR = obj
-SRCDIR = src
+BINDIR = bin#for binary
+INCLUDEDIR = src#for header files
+LIBDIR = lib#for library
+OBJDIR = obj#for objects
+SRCDIR = src#for source code
 
-#C compiler info
 #CC = gcc
-CC = g++
-CFLAGS = -Wall -I$(INCLUDEDIR) -L$(LIBDIR) -fPIC
+#C++ compiler info
+CXX = g++
+CXXFLAGS = -Wall -I$(INCLUDEDIR) -L$(LIBDIR) -fPIC
 
 #Header files
 _DEPS = *.hpp
@@ -21,7 +21,7 @@ OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
 
 #Create object files from source
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
-	@$(CC) -c -o $@ $< $(CFLAGS)
+	@$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 #Run program with dynamic libraries
 run:
@@ -36,7 +36,7 @@ buildClean:
 #LIBS = -lstdc++
 LIBS = -lhello -loperation
 $(BINDIR)/main: $(OBJ)
-	@$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+	@$(CXX) -o $@ $^ $(CXXFLAGS) $(LIBS)
 
 #Operation lib compile
 liboperation: $(OBJDIR)/operation/sum.o #Static library
@@ -44,7 +44,7 @@ liboperation: $(OBJDIR)/operation/sum.o #Static library
 
 #Hello lib compile
 libhello: $(OBJDIR)/hello/hello.o #Dynamic library
-	@$(CC) $(CFLAGS) -shared -o lib/$@.so $^
+	@$(CXX) $(CXXFLAGS) -shared -o lib/$@.so $^
 
 #Clean build files
 .PHONY: clean

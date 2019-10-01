@@ -19,10 +19,6 @@ make build
 ```bash
 make
 ```
-or run with static libraries
-```bash
-make run_static
-```
 
 ## Clean
 ```bash
@@ -33,7 +29,7 @@ force clean
 make clean FORCE=true
 ```
 
-## Default make
+## Default make (optional)
 ```bash
 make default-make
 ```
