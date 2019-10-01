@@ -1,0 +1,2 @@
+check for a .static file in the library
+delete libhello and liboperation in Makefile

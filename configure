@@ -2,5 +2,12 @@
 mkdir bin
 mkdir lib
 mkdir obj
-mkdir obj/hello
-mkdir obj/operation
+
+#Create object folders for libraries
+cd src
+for f in *; do
+    if [ -d ${f} ]; then
+        cd .. && mkdir obj/$f
+        cd src
+    fi
+done

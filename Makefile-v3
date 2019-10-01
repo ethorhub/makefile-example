@@ -34,15 +34,14 @@ buildClean:
 	@$(RM) $(OBJDIR)/*.o $(OBJDIR)/**/*.o $(LIBDIR)/*.a
 
 #Main program build with dynamic libs
-LIBS_JUST_NAME=$(subst /,,$(subst $(SRCDIR)/,,$(dir $(wildcard $(SRCDIR)/**/**))))
 #LIBS = -lstdc++
-LIBS = $(sort $(addprefix -l, $(LIBS_JUST_NAME)))
+LIBS = $(sort $(addprefix -l,$(subst /,,$(subst $(SRCDIR)/,,$(dir $(wildcard $(SRCDIR)/**/**))))))
 $(BINDIR)/main: $(OBJ)
 	@$(CXX) -o $@ $^ $(CXXFLAGS) $(LIBS)
 
 
 .PHONY: libs
-libs: $(sort $(addprefix lib-, $(LIBS_JUST_NAME)))
+libs: $(sort $(addprefix lib-,$(subst /,,$(subst $(SRCDIR)/,,$(dir $(wildcard $(SRCDIR)/**/**))))))
 .PHONY: %-lib
 lib-%:
 	@make $(subst .cpp,.o,$(subst $(SRCDIR),$(OBJDIR),$(wildcard $(SRCDIR)/$(subst lib-,,$@)/**.cpp)))
@@ -71,5 +70,5 @@ endif
 
 #all Makefile-v... files to default
 default-make:
-	@cp Makefile Makefile-vnext
+	@cp Makefile Makefile-v3
 	@mv Makefile.orig Makefile
